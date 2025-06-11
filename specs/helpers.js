@@ -1,75 +1,75 @@
-beforeEach(function() {
+beforeEach(function () {
   jasmine.addMatchers({
-    toHaveLength: function(util, customEqualityTesters) {
+    toHaveLength: function (util, customEqualityTesters) {
       return {
-        compare: function(actual, expected) {
+        compare: function (actual, expected) {
           return {
             pass: actual.length === expected
-          };
+          }
         }
-      };
+      }
     },
-    toHaveBeenCalledWithContext: function(util, customEqualityTesters) {
+    toHaveBeenCalledWithContext: function (util, customEqualityTesters) {
       return {
-        compare: function(actual, expected) {
+        compare: function (actual, expected) {
           return {
-            pass: actual.calls.any(function(call) {
-              return call.object === expected;
+            pass: actual.calls.any(function (call) {
+              return call.object === expected
             })
-          };
+          }
         }
-      };
+      }
     },
-    toHaveItems: function(util, customEqualityTesters) {
+    toHaveItems: function (util, customEqualityTesters) {
       return {
-        compare: function(actual, expected) {
+        compare: function (actual, expected) {
           if (actual.length != expected.length) {
-            return {pass: false};
+            return { pass: false }
           }
 
-          var ret = {};
-          ret.pass = actual.every(function(a) {
-            var passed = expected.some(function(e) {
-              return util.equals(a, e, customEqualityTesters);
-            });
+          const ret = {}
+          ret.pass = actual.every(function (a) {
+            const passed = expected.some(function (e) {
+              return util.equals(a, e, customEqualityTesters)
+            })
             if (!passed) {
               ret.message = "Object wasn't found:\n" +
-                JSON.stringify(a, null, 2) + "\n\nExpected:\n" +
-                JSON.stringify(expected, null, 2);
+                JSON.stringify(a, null, 2) + '\n\nExpected:\n' +
+                JSON.stringify(expected, null, 2)
             }
-            return passed;
-          });
+            return passed
+          })
 
-          return ret;
+          return ret
         }
-      };
+      }
     },
-    toBeInstanceOf: function(util, customEqualityTesters) {
+    toBeInstanceOf: function (util, customEqualityTesters) {
       return {
-        compare: function(actual, expected) {
+        compare: function (actual, expected) {
           return {
             pass: actual instanceof expected
-          };
+          }
         }
-      };
+      }
     },
-    toBeAPromise: function(util, customEqualityTesters) {
+    toBeAPromise: function (util, customEqualityTesters) {
       return {
-        compare: function(actual, expected) {
+        compare: function (actual, expected) {
           return {
-            pass: actual && typeof actual.then === "function"
-          };
+            pass: actual && typeof actual.then === 'function'
+          }
         }
-      };
+      }
     },
-    toBeANumber: function(util, customEqualityTesters) {
+    toBeANumber: function (util, customEqualityTesters) {
       return {
-        compare: function(actual, expected) {
+        compare: function (actual, expected) {
           return {
             pass: typeof actual === 'number' && !isNaN(actual)
-          };
+          }
         }
-      };
+      }
     }
-  });
-});
+  })
+})

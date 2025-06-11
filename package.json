@@ -1,44 +1,48 @@
 {
-  "name": "validate.js",
-  "version": "0.13.1",
-  "author": "Nicklas Ansman <nicklas@ansman.se>",
-  "description": "Declarative validations for JavaScript",
-  "main": "validate.js",
-  "typings": "validate.d.ts",
-  "homepage": "http://validatejs.org",
+  "name": "neovalidate",
+  "version": "0.1.0",
+  "author": "pokeghost <pokeghost@disroot.org>",
+  "contributors": [
+    "Nicklas Ansman <nicklas@ansman.se> (original validate.js author)"
+  ],
+  "description": "ES6+ fork of Validate.js, a declarative validation library",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "type": "module",
+  "homepage": "https://github.com/pokeghosst/neovalidate",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ansman/validate.js.git"
+    "url": "https://github.com/pokeghosst/neovalidate"
   },
   "files": [
-    "typings.json",
-    "validate.d.ts",
-    "validate.js",
-    "validate.min.js",
-    "validate.min.map"
+    "src/",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
-    "test": "grunt test",
-    "build": "grunt build",
-    "watch": "grunt watch",
-    "docs": "grunt docco"
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "lint": "standard --fix"
   },
   "keywords": [
     "validation",
-    "validate",
-    "server",
-    "client"
+    "validate"
   ],
   "devDependencies": {
-    "grunt": "1.0.1",
-    "grunt-notify": "0.4.5",
-    "grunt-contrib-watch": "1.0.0",
-    "grunt-contrib-jshint": "1.0.0",
-    "grunt-contrib-uglify": "1.0.1",
-    "grunt-contrib-jasmine": "1.0.3",
-    "grunt-docco": "0.4.0",
-    "grunt-template-jasmine-istanbul": "0.4.0",
-    "coveralls": "2.11.9"
+    "@eslint/js": "^9.28.0",
+    "@eslint/json": "^0.12.0",
+    "@vitest/coverage-v8": "^3.2.3",
+    "@vitest/ui": "^3.2.3",
+    "eslint": "^9.28.0",
+    "eslint-config-standard": "^17.1.0",
+    "globals": "^16.2.0",
+    "jsdom": "^26.1.0",
+    "prettier-config-standard": "^7.0.0",
+    "vitest": "^3.2.3"
   },
+  "prettier": "prettier-config-standard",
   "license": "MIT"
 }

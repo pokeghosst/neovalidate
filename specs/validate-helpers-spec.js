@@ -1,899 +1,899 @@
-describe("validate", function() {
-  describe('extend', function() {
-    it("extends the first argument with the remaining arguments", function() {
-      var obj = {};
-      validate.extend(obj, {foo: "foo"}, {bar: "bar"});
-      expect(obj).toEqual({foo: "foo", bar: "bar"});
-    });
+describe('validate', function () {
+  describe('extend', function () {
+    it('extends the first argument with the remaining arguments', function () {
+      const obj = {}
+      validate.extend(obj, { foo: 'foo' }, { bar: 'bar' })
+      expect(obj).toEqual({ foo: 'foo', bar: 'bar' })
+    })
 
-    it("returns the first argument", function() {
-      var obj = {};
-      expect(validate.extend(obj)).toBe(obj);
-    });
+    it('returns the first argument', function () {
+      const obj = {}
+      expect(validate.extend(obj)).toBe(obj)
+    })
 
-    it("extends with the seconds argument first", function() {
-      var actual = validate.extend({}, {foo: "foo"}, {foo: "bar"});
-      expect(actual).toEqual({foo: "bar"});
-    });
-  });
+    it('extends with the seconds argument first', function () {
+      const actual = validate.extend({}, { foo: 'foo' }, { foo: 'bar' })
+      expect(actual).toEqual({ foo: 'bar' })
+    })
+  })
 
-  describe('result', function() {
-    it("returns the first argument if it's not a function", function() {
-      var obj = {};
-      expect(validate.result(obj)).toBe(obj);
-    });
+  describe('result', function () {
+    it("returns the first argument if it's not a function", function () {
+      const obj = {}
+      expect(validate.result(obj)).toBe(obj)
+    })
 
-    it("calls the argument if it's a function and returns the result", function() {
-      var obj = jasmine.createSpy().and.returnValue("some return value");
-      expect(validate.result(obj)).toEqual("some return value");
-    });
+    it("calls the argument if it's a function and returns the result", function () {
+      const obj = jasmine.createSpy().and.returnValue('some return value')
+      expect(validate.result(obj)).toEqual('some return value')
+    })
 
-    it("accepts additional arguments as arguments to the function", function() {
-      var obj = jasmine.createSpy();
-      validate.result(obj, "foo", "bar", "baz");
-      expect(obj).toHaveBeenCalledWith("foo", "bar", "baz");
-    });
-  });
+    it('accepts additional arguments as arguments to the function', function () {
+      const obj = jasmine.createSpy()
+      validate.result(obj, 'foo', 'bar', 'baz')
+      expect(obj).toHaveBeenCalledWith('foo', 'bar', 'baz')
+    })
+  })
 
-  describe('isNumber', function() {
-    it("returns true for numbers", function() {
-      expect(validate.isNumber(0)).toBe(true);
-      expect(validate.isNumber(1)).toBe(true);
-      expect(validate.isNumber(Math.PI)).toBe(true);
-    });
+  describe('isNumber', function () {
+    it('returns true for numbers', function () {
+      expect(validate.isNumber(0)).toBe(true)
+      expect(validate.isNumber(1)).toBe(true)
+      expect(validate.isNumber(Math.PI)).toBe(true)
+    })
 
-    it("returns false for non numbers", function() {
-      expect(validate.isNumber(null)).toBe(false);
-      expect(validate.isNumber(true)).toBe(false);
-      expect(validate.isNumber("1")).toBe(false);
-    });
-  });
+    it('returns false for non numbers', function () {
+      expect(validate.isNumber(null)).toBe(false)
+      expect(validate.isNumber(true)).toBe(false)
+      expect(validate.isNumber('1')).toBe(false)
+    })
+  })
 
-  describe('isInteger', function() {
-    it("returns true for integers", function() {
-      expect(validate.isInteger(0)).toBe(true);
-      expect(validate.isInteger(1)).toBe(true);
-    });
+  describe('isInteger', function () {
+    it('returns true for integers', function () {
+      expect(validate.isInteger(0)).toBe(true)
+      expect(validate.isInteger(1)).toBe(true)
+    })
 
-    it("returns false for floats and other types ", function() {
-      expect(validate.isInteger(Math.PI)).toBe(false);
-      expect(validate.isInteger(null)).toBe(false);
-      expect(validate.isInteger("1")).toBe(false);
-    });
-  });
+    it('returns false for floats and other types ', function () {
+      expect(validate.isInteger(Math.PI)).toBe(false)
+      expect(validate.isInteger(null)).toBe(false)
+      expect(validate.isInteger('1')).toBe(false)
+    })
+  })
 
-  describe('isBoolean', function() {
-    it("returns true for booleans", function() {
-      expect(validate.isBoolean(true)).toBe(true);
-      expect(validate.isBoolean(false)).toBe(true);
-    });
+  describe('isBoolean', function () {
+    it('returns true for booleans', function () {
+      expect(validate.isBoolean(true)).toBe(true)
+      expect(validate.isBoolean(false)).toBe(true)
+    })
 
-    it("returns false for non booleans ", function() {
-      expect(validate.isBoolean(null)).toBe(false);
-      expect(validate.isBoolean({})).toBe(false);
-      expect(validate.isBoolean({foo: "bar"})).toBe(false);
-      expect(validate.isBoolean([])).toBe(false);
-      expect(validate.isBoolean("")).toBe(false);
-      expect(validate.isBoolean(function() {})).toBe(false);
-    });
-  });
+    it('returns false for non booleans ', function () {
+      expect(validate.isBoolean(null)).toBe(false)
+      expect(validate.isBoolean({})).toBe(false)
+      expect(validate.isBoolean({ foo: 'bar' })).toBe(false)
+      expect(validate.isBoolean([])).toBe(false)
+      expect(validate.isBoolean('')).toBe(false)
+      expect(validate.isBoolean(function () {})).toBe(false)
+    })
+  })
 
-  describe('isObject', function() {
-    it("returns true for objects", function() {
-      expect(validate.isObject({})).toBe(true);
-      expect(validate.isObject({foo: "bar"})).toBe(true);
-      expect(validate.isObject([])).toBe(true);
-      expect(validate.isObject(function() {})).toBe(true);
-    });
+  describe('isObject', function () {
+    it('returns true for objects', function () {
+      expect(validate.isObject({})).toBe(true)
+      expect(validate.isObject({ foo: 'bar' })).toBe(true)
+      expect(validate.isObject([])).toBe(true)
+      expect(validate.isObject(function () {})).toBe(true)
+    })
 
-    it("returns false for non objects", function() {
-      expect(validate.isObject(null)).toBe(false);
-      expect(validate.isObject(1)).toBe(false);
-      expect(validate.isObject("")).toBe(false);
-      expect(validate.isObject(false)).toBe(false);
-    });
-  });
+    it('returns false for non objects', function () {
+      expect(validate.isObject(null)).toBe(false)
+      expect(validate.isObject(1)).toBe(false)
+      expect(validate.isObject('')).toBe(false)
+      expect(validate.isObject(false)).toBe(false)
+    })
+  })
 
-  describe('isDefined', function() {
-    it("returns false for null and undefined", function() {
-      expect(validate.isDefined(null)).toBe(false);
-      expect(validate.isDefined(undefined)).toBe(false);
-    });
+  describe('isDefined', function () {
+    it('returns false for null and undefined', function () {
+      expect(validate.isDefined(null)).toBe(false)
+      expect(validate.isDefined(undefined)).toBe(false)
+    })
 
-    it("returns true for other values", function() {
-      expect(validate.isDefined(true)).toBe(true);
-      expect(validate.isDefined(0)).toBe(true);
-      expect(validate.isDefined("")).toBe(true);
-    });
-  });
+    it('returns true for other values', function () {
+      expect(validate.isDefined(true)).toBe(true)
+      expect(validate.isDefined(0)).toBe(true)
+      expect(validate.isDefined('')).toBe(true)
+    })
+  })
 
-  describe("isPromise", function() {
-    it("returns false for null and undefined", function() {
-      expect(validate.isPromise(null)).toBe(false);
-      expect(validate.isPromise(undefined)).toBe(false);
-    });
+  describe('isPromise', function () {
+    it('returns false for null and undefined', function () {
+      expect(validate.isPromise(null)).toBe(false)
+      expect(validate.isPromise(undefined)).toBe(false)
+    })
 
-    it("returns false for objects", function() {
-      expect(validate.isPromise({})).toBe(false);
-    });
+    it('returns false for objects', function () {
+      expect(validate.isPromise({})).toBe(false)
+    })
 
-    it("returns true for objects with a then function", function() {
-      expect(validate.isPromise({then: "that"})).toBe(false);
-      expect(validate.isPromise({then: function() {}})).toBe(true);
-    });
-  });
+    it('returns true for objects with a then function', function () {
+      expect(validate.isPromise({ then: 'that' })).toBe(false)
+      expect(validate.isPromise({ then: function () {} })).toBe(true)
+    })
+  })
 
-  describe('format', function() {
-    it("replaces %{...} with the correct value", function() {
-      var actual = validate.format("Foo is %{foo}, bar is %{bar}", {
-        foo: "foo",
-        bar: "bar"
-      });
-      expect(actual).toEqual("Foo is foo, bar is bar");
-    });
+  describe('format', function () {
+    it('replaces %{...} with the correct value', function () {
+      const actual = validate.format('Foo is %{foo}, bar is %{bar}', {
+        foo: 'foo',
+        bar: 'bar'
+      })
+      expect(actual).toEqual('Foo is foo, bar is bar')
+    })
 
-    it("can replace the same value multiple times", function() {
-      var actual = validate.format("%{foo} %{foo}", {foo: "foo"});
-      expect(actual).toEqual("foo foo");
-    });
+    it('can replace the same value multiple times', function () {
+      const actual = validate.format('%{foo} %{foo}', { foo: 'foo' })
+      expect(actual).toEqual('foo foo')
+    })
 
-    it("supports escaping %", function() {
-      var actual = validate.format("Foo is %%{foo}", {foo: "foo"});
-      expect(actual).toEqual("Foo is %{foo}");
-    });
+    it('supports escaping %', function () {
+      const actual = validate.format('Foo is %%{foo}', { foo: 'foo' })
+      expect(actual).toEqual('Foo is %{foo}')
+    })
 
-    it("handles non strings as the message", function() {
-      var obj = {foo: "bar"};
-      expect(validate.format(obj, {attr: "value"})).toBe(obj);
-    });
-  });
+    it('handles non strings as the message', function () {
+      const obj = { foo: 'bar' }
+      expect(validate.format(obj, { attr: 'value' })).toBe(obj)
+    })
+  })
 
-  describe("stringifyValue", function() {
-    it("simply calls validate.prettify", function() {
-      spyOn(validate, "prettify").and.returnValue("foobar");
-      expect(validate.stringifyValue("barfoo")).toEqual("foobar");
-      expect(validate.prettify).toHaveBeenCalledWith("barfoo");
-    });
+  describe('stringifyValue', function () {
+    it('simply calls validate.prettify', function () {
+      spyOn(validate, 'prettify').and.returnValue('foobar')
+      expect(validate.stringifyValue('barfoo')).toEqual('foobar')
+      expect(validate.prettify).toHaveBeenCalledWith('barfoo')
+    })
 
-    it("calls custom prettify from options", function() {
-      var options = {prettify: function() {}};
-      spyOn(options, "prettify").and.returnValue("foobar");
-      spyOn(validate, "prettify").and.returnValue("baz");
-      expect(validate.stringifyValue("barfoo", options)).toEqual("foobar");
-      expect(options.prettify).toHaveBeenCalledWith("barfoo");
-      expect(validate.prettify).not.toHaveBeenCalled();
-    });
-  });
+    it('calls custom prettify from options', function () {
+      const options = { prettify: function () {} }
+      spyOn(options, 'prettify').and.returnValue('foobar')
+      spyOn(validate, 'prettify').and.returnValue('baz')
+      expect(validate.stringifyValue('barfoo', options)).toEqual('foobar')
+      expect(options.prettify).toHaveBeenCalledWith('barfoo')
+      expect(validate.prettify).not.toHaveBeenCalled()
+    })
+  })
 
-  describe('prettify', function() {
-    it("lower cases the entire string", function() {
-      expect(validate.prettify("FOO BAR")).toEqual("foo bar");
-    });
+  describe('prettify', function () {
+    it('lower cases the entire string', function () {
+      expect(validate.prettify('FOO BAR')).toEqual('foo bar')
+    })
 
-    it("replaces underscores with spaces", function() {
-      expect(validate.prettify("foo_bar_baz")).toEqual("foo bar baz");
-    });
+    it('replaces underscores with spaces', function () {
+      expect(validate.prettify('foo_bar_baz')).toEqual('foo bar baz')
+    })
 
-    it("replaces dashes with spaces", function() {
-      expect(validate.prettify("foo-bar-baz")).toEqual("foo bar baz");
-    });
+    it('replaces dashes with spaces', function () {
+      expect(validate.prettify('foo-bar-baz')).toEqual('foo bar baz')
+    })
 
-    it("splits camel cased words", function() {
-      expect(validate.prettify("fooBar")).toEqual("foo bar");
-    });
+    it('splits camel cased words', function () {
+      expect(validate.prettify('fooBar')).toEqual('foo bar')
+    })
 
-    it("replaces periods with spaces if no space follows", function() {
-      expect(validate.prettify("foo.bar.baz")).toEqual("foo bar baz");
-      expect(validate.prettify("foo. bar")).toEqual("foo. bar");
-      expect(validate.prettify("foo .bar")).toEqual("foo .bar");
-      expect(validate.prettify("foo.bar.")).toEqual("foo bar.");
-    });
+    it('replaces periods with spaces if no space follows', function () {
+      expect(validate.prettify('foo.bar.baz')).toEqual('foo bar baz')
+      expect(validate.prettify('foo. bar')).toEqual('foo. bar')
+      expect(validate.prettify('foo .bar')).toEqual('foo .bar')
+      expect(validate.prettify('foo.bar.')).toEqual('foo bar.')
+    })
 
-    it("replaces backslashes with nothing", function() {
-      expect(validate.prettify("foo\\.bar\\.baz")).toEqual("foo bar baz");
-      expect(validate.prettify("foo\\\\.bar")).toEqual("foo bar");
-    });
+    it('replaces backslashes with nothing', function () {
+      expect(validate.prettify('foo\\.bar\\.baz')).toEqual('foo bar baz')
+      expect(validate.prettify('foo\\\\.bar')).toEqual('foo bar')
+    })
 
-    it("calls toString on objects", function() {
-      var object = {
-          toString: function() { return "Custom string"; }
-        };
+    it('calls toString on objects', function () {
+      const object = {
+        toString: function () { return 'Custom string' }
+      }
 
-      expect(validate.prettify(object)).toEqual("Custom string");
-    });
+      expect(validate.prettify(object)).toEqual('Custom string')
+    })
 
-    it("tries to stringify objects that don't implement toString", function() {
-      var object = Object.create(null);
+    it("tries to stringify objects that don't implement toString", function () {
+      const object = Object.create(null)
 
-      object.name = "Foo Bar";
+      object.name = 'Foo Bar'
 
-      expect(validate.prettify(object)).toEqual("{\"name\":\"Foo Bar\"}");
-    });
+      expect(validate.prettify(object)).toEqual('{"name":"Foo Bar"}')
+    })
 
-    it("throws an error when trying to parse cyclical structures", function() {
-      var object = Object.create(null);
+    it('throws an error when trying to parse cyclical structures', function () {
+      const object = Object.create(null)
 
-      object.name = "Foo Bar";
-      object.cycle = object;
+      object.name = 'Foo Bar'
+      object.cycle = object
 
-      expect(function () { 
-        return validate.prettify(object); 
-      }).toThrow();
-    });
+      expect(function () {
+        return validate.prettify(object)
+      }).toThrow()
+    })
 
-    it("doesn't allow too many decimals", function() {
-      expect(validate.prettify(4711)).toEqual("4711");
-      expect(validate.prettify(4711.2)).toEqual("4711.2");
-      expect(validate.prettify(4711.255555)).toEqual("4711.26");
-    });
+    it("doesn't allow too many decimals", function () {
+      expect(validate.prettify(4711)).toEqual('4711')
+      expect(validate.prettify(4711.2)).toEqual('4711.2')
+      expect(validate.prettify(4711.255555)).toEqual('4711.26')
+    })
 
-    it("handles arrays", function() {
-      var array = ["foo", "bar_baz"];
+    it('handles arrays', function () {
+      const array = ['foo', 'bar_baz']
       // It valls it recusively
-      spyOn(validate, "prettify").and.callThrough();
-      expect(validate.prettify(array)).toEqual("foo, bar baz");
-      expect(validate.prettify).toHaveBeenCalledWith(array);
-      expect(validate.prettify).toHaveBeenCalledWith("foo");
-      expect(validate.prettify).toHaveBeenCalledWith("bar_baz");
-    });
-  });
+      spyOn(validate, 'prettify').and.callThrough()
+      expect(validate.prettify(array)).toEqual('foo, bar baz')
+      expect(validate.prettify).toHaveBeenCalledWith(array)
+      expect(validate.prettify).toHaveBeenCalledWith('foo')
+      expect(validate.prettify).toHaveBeenCalledWith('bar_baz')
+    })
+  })
 
-  describe('isString', function() {
-    it("returns true for strings", function() {
-      expect(validate.isString("foobar")).toBe(true);
-      expect(validate.isString("")).toBe(true);
-    });
+  describe('isString', function () {
+    it('returns true for strings', function () {
+      expect(validate.isString('foobar')).toBe(true)
+      expect(validate.isString('')).toBe(true)
+    })
 
-    it("returns false for non strings", function() {
-      var obj = {toString: function() { return "foobar"; }};
-      expect(validate.isString(obj)).toBe(false);
-      expect(validate.isString(null)).toBe(false);
-      expect(validate.isString(true)).toBe(false);
-    });
-  });
+    it('returns false for non strings', function () {
+      const obj = { toString: function () { return 'foobar' } }
+      expect(validate.isString(obj)).toBe(false)
+      expect(validate.isString(null)).toBe(false)
+      expect(validate.isString(true)).toBe(false)
+    })
+  })
 
-  describe('isArray', function() {
-    var isArray = validate.isArray;
+  describe('isArray', function () {
+    const isArray = validate.isArray
 
-    it("returns true for arrays", function() {
-      expect(isArray([])).toBe(true);
-      expect(isArray([1])).toBe(true);
-      expect(isArray([1, 2])).toBe(true);
-    });
+    it('returns true for arrays', function () {
+      expect(isArray([])).toBe(true)
+      expect(isArray([1])).toBe(true)
+      expect(isArray([1, 2])).toBe(true)
+    })
 
-    it("returns false for non arrays", function() {
-      expect(isArray({})).toBe(false);
-      expect(isArray(null)).toBe(false);
-      expect(isArray(1)).toBe(false);
-      expect(isArray(true)).toBe(false);
-    });
-  });
+    it('returns false for non arrays', function () {
+      expect(isArray({})).toBe(false)
+      expect(isArray(null)).toBe(false)
+      expect(isArray(1)).toBe(false)
+      expect(isArray(true)).toBe(false)
+    })
+  })
 
-  describe('isHash', function() {
-    it("returns true for hashes", function() {
-      expect(validate.isHash({})).toBe(true);
-      expect(validate.isHash({foo: "bar"})).toBe(true);
-    });
+  describe('isHash', function () {
+    it('returns true for hashes', function () {
+      expect(validate.isHash({})).toBe(true)
+      expect(validate.isHash({ foo: 'bar' })).toBe(true)
+    })
 
-    it("returns false for non hashes", function() {
-      expect(validate.isHash([])).toBe(false);
-      expect(validate.isHash(function() {})).toBe(false);
-      expect(validate.isHash(null)).toBe(false);
-      expect(validate.isHash(1)).toBe(false);
-      expect(validate.isHash("")).toBe(false);
-      expect(validate.isHash(false)).toBe(false);
-    });
-  });
+    it('returns false for non hashes', function () {
+      expect(validate.isHash([])).toBe(false)
+      expect(validate.isHash(function () {})).toBe(false)
+      expect(validate.isHash(null)).toBe(false)
+      expect(validate.isHash(1)).toBe(false)
+      expect(validate.isHash('')).toBe(false)
+      expect(validate.isHash(false)).toBe(false)
+    })
+  })
 
-  describe('contains', function() {
-    var contains = validate.contains;
+  describe('contains', function () {
+    const contains = validate.contains
 
-    it("returns false when not passing in a target object", function() {
-      expect(contains(null, "foo")).toBe(false);
-      expect(contains(undefined, "foo")).toBe(false);
-    });
+    it('returns false when not passing in a target object', function () {
+      expect(contains(null, 'foo')).toBe(false)
+      expect(contains(undefined, 'foo')).toBe(false)
+    })
 
-    describe("arrays", function() {
-      it("returns true if the value is in the specified array", function() {
-        expect(contains(["foo", "bar", "baz"], "foo")).toBe(true);
-        expect(contains(["foo", "bar", "baz"], "bar")).toBe(true);
-        expect(contains(["foo", "bar", "baz"], "baz")).toBe(true);
-      });
+    describe('arrays', function () {
+      it('returns true if the value is in the specified array', function () {
+        expect(contains(['foo', 'bar', 'baz'], 'foo')).toBe(true)
+        expect(contains(['foo', 'bar', 'baz'], 'bar')).toBe(true)
+        expect(contains(['foo', 'bar', 'baz'], 'baz')).toBe(true)
+      })
 
-      it("returns false if the value is not in the specified array", function() {
-        expect(contains(["foo", "bar", "baz"], "quux")).toBe(false);
-        expect(contains(["foo", "bar", "baz"], false)).toBe(false);
-        expect(contains(["foo", "bar", "baz"], 0)).toBe(false);
-        expect(contains(["foo", "bar", "baz"], null)).toBe(false);
-      });
+      it('returns false if the value is not in the specified array', function () {
+        expect(contains(['foo', 'bar', 'baz'], 'quux')).toBe(false)
+        expect(contains(['foo', 'bar', 'baz'], false)).toBe(false)
+        expect(contains(['foo', 'bar', 'baz'], 0)).toBe(false)
+        expect(contains(['foo', 'bar', 'baz'], null)).toBe(false)
+      })
 
-      it("works with empty arrays", function() {
-        expect(contains([], "foo")).toBe(false);
-      });
-    });
+      it('works with empty arrays', function () {
+        expect(contains([], 'foo')).toBe(false)
+      })
+    })
 
-    describe("objects", function() {
-      it("returns true if the value is a key in the object", function() {
-        expect(contains({foo: false, bar: "bar"}, "foo")).toBe(true);
-        expect(contains({foo: false, bar: "bar"}, "bar")).toBe(true);
-      });
+    describe('objects', function () {
+      it('returns true if the value is a key in the object', function () {
+        expect(contains({ foo: false, bar: 'bar' }, 'foo')).toBe(true)
+        expect(contains({ foo: false, bar: 'bar' }, 'bar')).toBe(true)
+      })
 
-      it("returns false if the value is not a key in the object", function() {
-        expect(contains({foo: false, bar: "bar"}, "quux")).toBe(false);
-        expect(contains({foo: false, bar: "bar"}, null)).toBe(false);
-        expect(contains({foo: false, bar: "bar"}, 1)).toBe(false);
-        expect(contains({foo: false, bar: "bar"}, true)).toBe(false);
-      });
+      it('returns false if the value is not a key in the object', function () {
+        expect(contains({ foo: false, bar: 'bar' }, 'quux')).toBe(false)
+        expect(contains({ foo: false, bar: 'bar' }, null)).toBe(false)
+        expect(contains({ foo: false, bar: 'bar' }, 1)).toBe(false)
+        expect(contains({ foo: false, bar: 'bar' }, true)).toBe(false)
+      })
 
-      it("works with empty objects", function() {
-        expect(contains({}, "foo")).toBe(false);
-      });
-    });
-  });
+      it('works with empty objects', function () {
+        expect(contains({}, 'foo')).toBe(false)
+      })
+    })
+  })
 
-  describe('capitalize', function() {
-    var capitalize = validate.capitalize;
+  describe('capitalize', function () {
+    const capitalize = validate.capitalize
 
-    it("captializes the first word", function() {
-      expect(capitalize("foo")).toEqual("Foo");
-      expect(capitalize("foo bar")).toEqual("Foo bar");
-      expect(capitalize("foo bar baz")).toEqual("Foo bar baz");
-    });
+    it('captializes the first word', function () {
+      expect(capitalize('foo')).toEqual('Foo')
+      expect(capitalize('foo bar')).toEqual('Foo bar')
+      expect(capitalize('foo bar baz')).toEqual('Foo bar baz')
+    })
 
-    it("returns the value for non strings", function() {
-      var o = {foo: "bar"};
-      expect(capitalize(o)).toEqual(o);
-    });
-  });
+    it('returns the value for non strings', function () {
+      const o = { foo: 'bar' }
+      expect(capitalize(o)).toEqual(o)
+    })
+  })
 
-  describe("pruneEmptyErrors", function() {
-    it("removes empty errors", function() {
-      var input = [{
-          attribute: "name",
-          value: "test",
-          validator: "fail",
-          options: {"someOption": "someValue"},
-          error: "foobar"
-        }, {
-          attribute: "name",
-          value: "test",
-          validator: "fail2",
-          options: true,
-          error: ["foo", "bar"]
-        }, {
-          attribute: "name",
-          value: "test",
-          validator: "pass",
-          options: true,
-          error: null
-        }, {
-          attribute: "name",
-          value: "test",
-          validator: "pass",
-          options: true,
-          error: []
-        }, {
-          attribute: "name",
-          value: "test",
-          validator: "pass",
-          options: true,
-          error: ""
-      }];
+  describe('pruneEmptyErrors', function () {
+    it('removes empty errors', function () {
+      const input = [{
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail',
+        options: { someOption: 'someValue' },
+        error: 'foobar'
+      }, {
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail2',
+        options: true,
+        error: ['foo', 'bar']
+      }, {
+        attribute: 'name',
+        value: 'test',
+        validator: 'pass',
+        options: true,
+        error: null
+      }, {
+        attribute: 'name',
+        value: 'test',
+        validator: 'pass',
+        options: true,
+        error: []
+      }, {
+        attribute: 'name',
+        value: 'test',
+        validator: 'pass',
+        options: true,
+        error: ''
+      }]
 
       expect(validate.pruneEmptyErrors(input)).toEqual([{
-          attribute: "name",
-          value: "test",
-          validator: "fail",
-          options: {"someOption": "someValue"},
-          error: "foobar"
-        }, {
-          attribute: "name",
-          value: "test",
-          validator: "fail2",
-          options: true,
-          error: ["foo", "bar"]
-      }]);
-    });
-  });
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail',
+        options: { someOption: 'someValue' },
+        error: 'foobar'
+      }, {
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail2',
+        options: true,
+        error: ['foo', 'bar']
+      }])
+    })
+  })
 
-  describe("expandMultipleErrors", function() {
-    it("expands error arrays to multiple entries", function() {
-      var input = [{
-          attribute: "name",
-          value: "test",
-          validator: "fail",
-          options: {"someOption": "someValue"},
-          error: "foobar"
-        }, {
-          attribute: "name",
-          value: "test",
-          validator: "fail2",
-          options: true,
-          error: ["foo", "bar"]
-      }];
+  describe('expandMultipleErrors', function () {
+    it('expands error arrays to multiple entries', function () {
+      const input = [{
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail',
+        options: { someOption: 'someValue' },
+        error: 'foobar'
+      }, {
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail2',
+        options: true,
+        error: ['foo', 'bar']
+      }]
 
       expect(validate.expandMultipleErrors(input)).toEqual([{
-          attribute: "name",
-          value: "test",
-          validator: "fail",
-          options: {"someOption": "someValue"},
-          error: "foobar"
-        }, {
-          attribute: "name",
-          value: "test",
-          validator: "fail2",
-          options: true,
-          error: "foo"
-        }, {
-          attribute: "name",
-          value: "test",
-          validator: "fail2",
-          options: true,
-          error: "bar"
-      }]);
-    });
-  });
-
-  describe('convertErrorMessages', function() {
-    var convertErrorMessages = validate.convertErrorMessages;
-
-    it("prettifies and prepends the attribute", function() {
-      var errors = [{
-        attribute: "foo",
-        error: "can't be blank",
-        someOtherProperty: "someOtherProperty",
-        value: "foobar"
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail',
+        options: { someOption: 'someValue' },
+        error: 'foobar'
       }, {
-        attribute: "foo_bar",
-        error: "has some other problem",
-        value: "foobar"
-      }];
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail2',
+        options: true,
+        error: 'foo'
+      }, {
+        attribute: 'name',
+        value: 'test',
+        validator: 'fail2',
+        options: true,
+        error: 'bar'
+      }])
+    })
+  })
+
+  describe('convertErrorMessages', function () {
+    const convertErrorMessages = validate.convertErrorMessages
+
+    it('prettifies and prepends the attribute', function () {
+      const errors = [{
+        attribute: 'foo',
+        error: "can't be blank",
+        someOtherProperty: 'someOtherProperty',
+        value: 'foobar'
+      }, {
+        attribute: 'foo_bar',
+        error: 'has some other problem',
+        value: 'foobar'
+      }]
 
       expect(convertErrorMessages(errors)).toEqual([{
-        attribute: "foo",
+        attribute: 'foo',
         error: "Foo can't be blank",
-        someOtherProperty: "someOtherProperty",
-        value: "foobar"
+        someOtherProperty: 'someOtherProperty',
+        value: 'foobar'
       }, {
-        attribute: "foo_bar",
-        error: "Foo bar has some other problem",
-        value: "foobar"
-      }]);
-    });
+        attribute: 'foo_bar',
+        error: 'Foo bar has some other problem',
+        value: 'foobar'
+      }])
+    })
 
-    it("calls custom prettify from options", function() {
-      var errors = [{
-          attribute: "foo",
-          error: "can't be blank"
-        }]
-        , options = {prettify: function() {}};
-      spyOn(options, "prettify").and.returnValue("foobar");
-      spyOn(validate, "prettify").and.returnValue("baz");
-      expect(convertErrorMessages(errors, options)[0].error).toEqual("Foobar can't be blank");
-      expect(options.prettify).toHaveBeenCalledWith("foo");
-      expect(validate.prettify).not.toHaveBeenCalled();
-    });
+    it('calls custom prettify from options', function () {
+      const errors = [{
+        attribute: 'foo',
+        error: "can't be blank"
+      }]
+      const options = { prettify: function () {} }
+      spyOn(options, 'prettify').and.returnValue('foobar')
+      spyOn(validate, 'prettify').and.returnValue('baz')
+      expect(convertErrorMessages(errors, options)[0].error).toEqual("Foobar can't be blank")
+      expect(options.prettify).toHaveBeenCalledWith('foo')
+      expect(validate.prettify).not.toHaveBeenCalled()
+    })
 
-    it("doesn't modify the input", function() {
-      var errors = [{
-        attribute: "foo",
+    it("doesn't modify the input", function () {
+      const errors = [{
+        attribute: 'foo',
         error: "can't be blank",
-        value: "foobar"
-      }];
-      convertErrorMessages(errors);
+        value: 'foobar'
+      }]
+      convertErrorMessages(errors)
       expect(errors).toEqual([{
-        attribute: "foo",
+        attribute: 'foo',
         error: "can't be blank",
-        value: "foobar"
-      }]);
-    });
+        value: 'foobar'
+      }])
+    })
 
-    it("returns an empty object if there are no errors", function() {
-      expect(convertErrorMessages([])).toEqual([]);
-    });
+    it('returns an empty object if there are no errors', function () {
+      expect(convertErrorMessages([])).toEqual([])
+    })
 
-    it("doesn't prepend the attribute name if the message starts with a ^", function() {
-      var errors = [{
-        attribute: "foo",
+    it("doesn't prepend the attribute name if the message starts with a ^", function () {
+      const errors = [{
+        attribute: 'foo',
         error: "^Please don't do that",
-        value: "foobar"
-      }];
+        value: 'foobar'
+      }]
       expect(convertErrorMessages(errors)).toEqual([{
-        attribute: "foo",
+        attribute: 'foo',
         error: "Please don't do that",
-        value: "foobar"
-      }]);
-    });
+        value: 'foobar'
+      }])
+    })
 
-    it("handles an escaped ^", function() {
-      var errors = [{
-        attribute: "foo",
-        error: "\\^ has a weird message^\\^",
-        value: "foobar"
-      }];
+    it('handles an escaped ^', function () {
+      const errors = [{
+        attribute: 'foo',
+        error: '\\^ has a weird message^\\^',
+        value: 'foobar'
+      }]
       expect(convertErrorMessages(errors)).toEqual([{
-        attribute: "foo",
-        error: "Foo ^ has a weird message^^",
-        value: "foobar"
-      }]);
-    });
+        attribute: 'foo',
+        error: 'Foo ^ has a weird message^^',
+        value: 'foobar'
+      }])
+    })
 
-    it("doesn't prepend the attribute name if fullMessages is false", function() {
-      var errors = [{
-        attribute: "foo",
+    it("doesn't prepend the attribute name if fullMessages is false", function () {
+      const errors = [{
+        attribute: 'foo',
         error: "Please don't do that",
-        value: "foobar"
-      }];
-      expect(convertErrorMessages(errors, {fullMessages: false})).toEqual([{
-        attribute: "foo",
+        value: 'foobar'
+      }]
+      expect(convertErrorMessages(errors, { fullMessages: false })).toEqual([{
+        attribute: 'foo',
         error: "Please don't do that",
-        value: "foobar"
-      }]);
-    });
+        value: 'foobar'
+      }])
+    })
 
-    it("still strips the leading ^ even if fullmessages if false", function() {
-      var errors = [{
-        attribute: "foo",
-        error: "\\^ has a weird message^\\^",
-        value: "foobar"
-      }];
-      expect(convertErrorMessages(errors, {fullMessages: false})).toEqual([{
-        attribute: "foo",
-        error: "^ has a weird message^^",
-        value: "foobar"
-      }]);
-    });
+    it('still strips the leading ^ even if fullmessages if false', function () {
+      const errors = [{
+        attribute: 'foo',
+        error: '\\^ has a weird message^\\^',
+        value: 'foobar'
+      }]
+      expect(convertErrorMessages(errors, { fullMessages: false })).toEqual([{
+        attribute: 'foo',
+        error: '^ has a weird message^^',
+        value: 'foobar'
+      }])
+    })
 
-    it("allow messages to contain %{value}", function() {
-      var errors = [{
-        attribute: "foo",
-        error: "foo %{value}",
-        someOtherProperty: "someOtherProperty",
-        value: "foobar"
-      }];
+    it('allow messages to contain %{value}', function () {
+      const errors = [{
+        attribute: 'foo',
+        error: 'foo %{value}',
+        someOtherProperty: 'someOtherProperty',
+        value: 'foobar'
+      }]
 
-      spyOn(validate, "format").and.callThrough();
-      spyOn(validate, "stringifyValue").and.returnValue("barfoo");
+      spyOn(validate, 'format').and.callThrough()
+      spyOn(validate, 'stringifyValue').and.returnValue('barfoo')
 
       expect(convertErrorMessages(errors)).toEqual([{
-        attribute: "foo",
-        error: "Foo foo barfoo",
-        someOtherProperty: "someOtherProperty",
-        value: "foobar"
-      }]);
-      expect(validate.format).toHaveBeenCalledWith("Foo foo %{value}", {
-        value: "barfoo"
-      });
-    });
-  });
+        attribute: 'foo',
+        error: 'Foo foo barfoo',
+        someOtherProperty: 'someOtherProperty',
+        value: 'foobar'
+      }])
+      expect(validate.format).toHaveBeenCalledWith('Foo foo %{value}', {
+        value: 'barfoo'
+      })
+    })
+  })
 
-  describe("groupErrorsByAttribute", function() {
-    it("groups errors by attribute", function() {
-      var input = [{
-          attribute: "foo",
-          someKey: "someValue"
-        }, {
-          attribute: "bar",
-          someOtherKey: "someOtherValue"
-        }, {
-          attribute: "foo",
-          someThirdKey: "someThirdValue"
-      }];
+  describe('groupErrorsByAttribute', function () {
+    it('groups errors by attribute', function () {
+      const input = [{
+        attribute: 'foo',
+        someKey: 'someValue'
+      }, {
+        attribute: 'bar',
+        someOtherKey: 'someOtherValue'
+      }, {
+        attribute: 'foo',
+        someThirdKey: 'someThirdValue'
+      }]
 
       expect(validate.groupErrorsByAttribute(input)).toEqual({
         foo: [{
-          attribute: "foo",
-          someKey: "someValue"
+          attribute: 'foo',
+          someKey: 'someValue'
         }, {
-          attribute: "foo",
-          someThirdKey: "someThirdValue"
+          attribute: 'foo',
+          someThirdKey: 'someThirdValue'
         }],
         bar: [{
-          attribute: "bar",
-          someOtherKey: "someOtherValue"
+          attribute: 'bar',
+          someOtherKey: 'someOtherValue'
         }]
-      });
-    });
-  });
+      })
+    })
+  })
 
-  describe("processValidationResults", function() {
-    var pvr = validate.processValidationResults;
+  describe('processValidationResults', function () {
+    const pvr = validate.processValidationResults
 
-    it("allows the validator to return a string", function() {
-      var results = [{attribute: "name", error: "foobar"}];
-      expect(pvr(results, {})).toEqual({name: ["Name foobar"]});
-    });
+    it('allows the validator to return a string', function () {
+      const results = [{ attribute: 'name', error: 'foobar' }]
+      expect(pvr(results, {})).toEqual({ name: ['Name foobar'] })
+    })
 
-    it("allows the validator to return an array", function() {
-      var results = [{attribute: "name", error: ["foo", "bar"]}];
-      expect(pvr(results, {})).toEqual({name: ["Name foo", "Name bar"]});
-    });
+    it('allows the validator to return an array', function () {
+      const results = [{ attribute: 'name', error: ['foo', 'bar'] }]
+      expect(pvr(results, {})).toEqual({ name: ['Name foo', 'Name bar'] })
+    })
 
-    it("supports multiple entries for the same attribute", function() {
-      var results = [
-        {attribute: "name", error: ["foo", "bar"]},
-        {attribute: "name", error: "baz"}
-      ];
+    it('supports multiple entries for the same attribute', function () {
+      const results = [
+        { attribute: 'name', error: ['foo', 'bar'] },
+        { attribute: 'name', error: 'baz' }
+      ]
       expect(pvr(results, {})).toEqual({
-        name: ["Name foo", "Name bar", "Name baz"]
-      });
-    });
+        name: ['Name foo', 'Name bar', 'Name baz']
+      })
+    })
 
-    it("the correct functions", function() {
-      spyOn(validate, "pruneEmptyErrors").and.returnValue("pruned");
-      spyOn(validate, "expandMultipleErrors").and.returnValue("expanded");
-      spyOn(validate, "convertErrorMessages").and.returnValue([]);
-      var options = {option: "value"};
-      expect(pvr("input", options)).toBe(undefined);
+    it('the correct functions', function () {
+      spyOn(validate, 'pruneEmptyErrors').and.returnValue('pruned')
+      spyOn(validate, 'expandMultipleErrors').and.returnValue('expanded')
+      spyOn(validate, 'convertErrorMessages').and.returnValue([])
+      const options = { option: 'value' }
+      expect(pvr('input', options)).toBe(undefined)
 
       expect(validate.pruneEmptyErrors)
-        .toHaveBeenCalledWith("input", options);
+        .toHaveBeenCalledWith('input', options)
       expect(validate.expandMultipleErrors)
-        .toHaveBeenCalledWith("pruned", options);
+        .toHaveBeenCalledWith('pruned', options)
       expect(validate.convertErrorMessages)
-        .toHaveBeenCalledWith("expanded", options);
-    });
+        .toHaveBeenCalledWith('expanded', options)
+    })
 
-    it("throws an error for unknown formats", function() {
-      expect(function() {
-        pvr([], {format: "foobar"});
-      }).toThrow(new Error("Unknown format foobar"));
-    });
-  });
+    it('throws an error for unknown formats', function () {
+      expect(function () {
+        pvr([], { format: 'foobar' })
+      }).toThrow(new Error('Unknown format foobar'))
+    })
+  })
 
-  describe("flattenErrorsToArray", function() {
-    it("flattens an array of errors objects to just the messages", function() {
-      var input = [{
-        error: "error 1",
-        someKey: "someValue"
+  describe('flattenErrorsToArray', function () {
+    it('flattens an array of errors objects to just the messages', function () {
+      const input = [{
+        error: 'error 1',
+        someKey: 'someValue'
       }, {
-        error: "error 2"
-      }];
+        error: 'error 2'
+      }]
       expect(validate.flattenErrorsToArray(input)).toEqual([
-        "error 1",
-        "error 2"
-      ]);
-    });
-  });
+        'error 1',
+        'error 2'
+      ])
+    })
+  })
 
-  describe('isFunction', function() {
-    var isFunction = validate.isFunction;
+  describe('isFunction', function () {
+    const isFunction = validate.isFunction
 
-    it("returns true for functions", function() {
-      expect(isFunction(function() {})).toBe(true);
-    });
+    it('returns true for functions', function () {
+      expect(isFunction(function () {})).toBe(true)
+    })
 
-    it("returns false for non functions", function() {
-      expect(isFunction({})).toBe(false);
-      expect(isFunction(null)).toBe(false);
-      expect(isFunction(1)).toBe(false);
-      expect(isFunction(true)).toBe(false);
-    });
-  });
+    it('returns false for non functions', function () {
+      expect(isFunction({})).toBe(false)
+      expect(isFunction(null)).toBe(false)
+      expect(isFunction(1)).toBe(false)
+      expect(isFunction(true)).toBe(false)
+    })
+  })
 
-  describe('exposeModule', function() {
-    var exposeModule = validate.exposeModule;
+  describe('exposeModule', function () {
+    const exposeModule = validate.exposeModule
 
-    it("supports simple browser inclusion", function() {
-      var root = {};
-      exposeModule(validate, root, null, null, null);
-      expect(root.validate).toBe(validate);
-    });
+    it('supports simple browser inclusion', function () {
+      const root = {}
+      exposeModule(validate, root, null, null, null)
+      expect(root.validate).toBe(validate)
+    })
 
-    it("supports AMD", function() {
-      var root = {}
-        , define = function(deps, func) {
-          expect(deps).toEqual([]);
-          expect(func()).toBe(validate);
-        };
+    it('supports AMD', function () {
+      const root = {}
+      const define = function (deps, func) {
+        expect(deps).toEqual([])
+        expect(func()).toBe(validate)
+      }
 
-      var defineSpy = jasmine.createSpy('define').and.callFake(define);
+      const defineSpy = jasmine.createSpy('define').and.callFake(define)
 
-      exposeModule(validate, root, null, null, defineSpy);
-      expect(defineSpy).not.toHaveBeenCalled();
+      exposeModule(validate, root, null, null, defineSpy)
+      expect(defineSpy).not.toHaveBeenCalled()
 
-      defineSpy.amd = true;
+      defineSpy.amd = true
 
-      exposeModule(validate, root, null, null, defineSpy);
+      exposeModule(validate, root, null, null, defineSpy)
 
-      expect(defineSpy).toHaveBeenCalled();
+      expect(defineSpy).toHaveBeenCalled()
 
       // It should still expose it through the root
-      expect(root.validate).toBe(validate);
-    });
+      expect(root.validate).toBe(validate)
+    })
 
-    it("supports exports", function() {
-      var root = {}
-        , exports = {};
+    it('supports exports', function () {
+      const root = {}
+      const exports = {}
 
-      exposeModule(validate, root, exports, null, null);
+      exposeModule(validate, root, exports, null, null)
 
-      expect(root).toEqual({});
-      expect(exports.validate).toBe(validate);
-    });
+      expect(root).toEqual({})
+      expect(exports.validate).toBe(validate)
+    })
 
-    it("supports module.exports", function() {
-      var root = {}
-        , exports = {}
-        , module = {exports: true};
+    it('supports module.exports', function () {
+      const root = {}
+      const exports = {}
+      const module = { exports: true }
 
-      exposeModule(validate, root, exports, module, null);
+      exposeModule(validate, root, exports, module, null)
 
-      expect(root).toEqual({});
-      expect(module.exports).toEqual(validate);
-      expect(module.exports.validate).toEqual(validate);
-    });
-  });
+      expect(root).toEqual({})
+      expect(module.exports).toEqual(validate)
+      expect(module.exports.validate).toEqual(validate)
+    })
+  })
 
-  describe("warn", function() {
-    var console = window.console;
+  describe('warn', function () {
+    const console = window.console
 
-    beforeEach(function() {
-      window.console = undefined;
-    });
+    beforeEach(function () {
+      window.console = undefined
+    })
 
-    afterEach(function() {
-      window.console = console;
-    });
+    afterEach(function () {
+      window.console = console
+    })
 
-    it("does nothing if the console isn't defined", function() {
-      expect(function() { validate.warn("Msg"); }).not.toThrow();
-    });
+    it("does nothing if the console isn't defined", function () {
+      expect(function () { validate.warn('Msg') }).not.toThrow()
+    })
 
-    it("calls console.warn if defined", function() {
+    it('calls console.warn if defined', function () {
       window.console = {
-        warn: jasmine.createSpy("warn")
-      };
-      validate.warn("Msg");
-      expect(window.console.warn).toHaveBeenCalledWith("[validate.js] Msg");
-    });
-  });
+        warn: jasmine.createSpy('warn')
+      }
+      validate.warn('Msg')
+      expect(window.console.warn).toHaveBeenCalledWith('[validate.js] Msg')
+    })
+  })
 
-  describe("error", function() {
-    var console = window.console;
+  describe('error', function () {
+    const console = window.console
 
-    beforeEach(function() { window.console = undefined; });
-    afterEach(function() { window.console = console; });
+    beforeEach(function () { window.console = undefined })
+    afterEach(function () { window.console = console })
 
-    it("does nothing if the console isn't defined", function() {
-      validate.error("Msg");
-      expect(function() { validate.error("Msg"); }).not.toThrow();
-    });
+    it("does nothing if the console isn't defined", function () {
+      validate.error('Msg')
+      expect(function () { validate.error('Msg') }).not.toThrow()
+    })
 
-    it("calls console.error if defined", function() {
+    it('calls console.error if defined', function () {
       window.console = {
-        error: jasmine.createSpy("error")
-      };
-      validate.error("Msg");
-      expect(window.console.error).toHaveBeenCalledWith("[validate.js] Msg");
-    });
-  });
+        error: jasmine.createSpy('error')
+      }
+      validate.error('Msg')
+      expect(window.console.error).toHaveBeenCalledWith('[validate.js] Msg')
+    })
+  })
 
-  describe("getDeepObjectValue", function() {
-    it("supports multiple keys separated using a period", function() {
-      var attributes = {
+  describe('getDeepObjectValue', function () {
+    it('supports multiple keys separated using a period', function () {
+      const attributes = {
         foo: {
           bar: {
             baz: 3
           }
         }
-      };
+      }
 
-      expect(validate.getDeepObjectValue(attributes, "foo.bar.baz")).toBe(3);
-    });
+      expect(validate.getDeepObjectValue(attributes, 'foo.bar.baz')).toBe(3)
+    })
 
-    it("returns undefined if any key is not found", function() {
-      var attributes = {
+    it('returns undefined if any key is not found', function () {
+      const attributes = {
         foo: {
           bar: {
             baz: 3
           }
         }
-      };
+      }
 
-      expect(validate.getDeepObjectValue(attributes, "bar.foo")).toBe(undefined);
-      expect(validate.getDeepObjectValue(attributes, "foo.baz")).toBe(undefined);
-    });
+      expect(validate.getDeepObjectValue(attributes, 'bar.foo')).toBe(undefined)
+      expect(validate.getDeepObjectValue(attributes, 'foo.baz')).toBe(undefined)
+    })
 
-    it("handles the object being non objects", function() {
-      expect(validate.getDeepObjectValue(null, "foo")).toBe(undefined);
-      expect(validate.getDeepObjectValue("foo", "foo")).toBe(undefined);
-      expect(validate.getDeepObjectValue(3, "foo")).toBe(undefined);
-      expect(validate.getDeepObjectValue([], "foo")).toBe(undefined);
-      expect(validate.getDeepObjectValue(true, "foo")).toBe(undefined);
-    });
+    it('handles the object being non objects', function () {
+      expect(validate.getDeepObjectValue(null, 'foo')).toBe(undefined)
+      expect(validate.getDeepObjectValue('foo', 'foo')).toBe(undefined)
+      expect(validate.getDeepObjectValue(3, 'foo')).toBe(undefined)
+      expect(validate.getDeepObjectValue([], 'foo')).toBe(undefined)
+      expect(validate.getDeepObjectValue(true, 'foo')).toBe(undefined)
+    })
 
-    it("handles the keypath being non strings", function() {
-      expect(validate.getDeepObjectValue({}, null)).toBe(undefined);
-      expect(validate.getDeepObjectValue({}, 3)).toBe(undefined);
-      expect(validate.getDeepObjectValue({}, {})).toBe(undefined);
-      expect(validate.getDeepObjectValue({}, [])).toBe(undefined);
-      expect(validate.getDeepObjectValue({}, true)).toBe(undefined);
-    });
+    it('handles the keypath being non strings', function () {
+      expect(validate.getDeepObjectValue({}, null)).toBe(undefined)
+      expect(validate.getDeepObjectValue({}, 3)).toBe(undefined)
+      expect(validate.getDeepObjectValue({}, {})).toBe(undefined)
+      expect(validate.getDeepObjectValue({}, [])).toBe(undefined)
+      expect(validate.getDeepObjectValue({}, true)).toBe(undefined)
+    })
 
-    it("handles escapes properly", function() {
-      var attributes = {
-        "foo.bar": {
+    it('handles escapes properly', function () {
+      const attributes = {
+        'foo.bar': {
           baz: 3
         },
-        "foo\\": {
+        'foo\\': {
           bar: {
             baz: 5
           }
         }
-      };
+      }
 
-      expect(validate.getDeepObjectValue(attributes, "foo.bar.baz"))
-        .toBe(undefined);
+      expect(validate.getDeepObjectValue(attributes, 'foo.bar.baz'))
+        .toBe(undefined)
 
-      expect(validate.getDeepObjectValue(attributes, "foo\\.bar.baz"))
-        .toBe(3);
+      expect(validate.getDeepObjectValue(attributes, 'foo\\.bar.baz'))
+        .toBe(3)
 
-      expect(validate.getDeepObjectValue(attributes, "foo\\\\.bar.baz"))
-        .toBe(5);
+      expect(validate.getDeepObjectValue(attributes, 'foo\\\\.bar.baz'))
+        .toBe(5)
 
-      expect(validate.getDeepObjectValue(attributes, "\\foo\\\\.bar.baz"))
-        .toBe(5);
-    });
-  });
+      expect(validate.getDeepObjectValue(attributes, '\\foo\\\\.bar.baz'))
+        .toBe(5)
+    })
+  })
 
-  describe("isDate", function() {
-    it("returns true for dates", function() {
-      expect(validate.isDate(new Date())).toBe(true);
-    });
+  describe('isDate', function () {
+    it('returns true for dates', function () {
+      expect(validate.isDate(new Date())).toBe(true)
+    })
 
-    it("returns false for non dates", function() {
-      expect(validate.isDate(Date.now())).toBe(false);
-      expect(validate.isDate({})).toBe(false);
-    });
-  });
+    it('returns false for non dates', function () {
+      expect(validate.isDate(Date.now())).toBe(false)
+      expect(validate.isDate({})).toBe(false)
+    })
+  })
 
-  describe("isEmpty", function() {
-    it("considers null and undefined values empty", function() {
-      expect(validate.isEmpty(null)).toBe(true);
-      expect(validate.isEmpty(undefined)).toBe(true);
-    });
+  describe('isEmpty', function () {
+    it('considers null and undefined values empty', function () {
+      expect(validate.isEmpty(null)).toBe(true)
+      expect(validate.isEmpty(undefined)).toBe(true)
+    })
 
-    it("considers functions non empty", function() {
-      expect(validate.isEmpty(function(){})).toBe(false);
-    });
+    it('considers functions non empty', function () {
+      expect(validate.isEmpty(function () {})).toBe(false)
+    })
 
-    it("considers whitespace only strings empty", function() {
-      expect(validate.isEmpty("")).toBe(true);
-      expect(validate.isEmpty(" ")).toBe(true);
-      expect(validate.isEmpty("         ")).toBe(true);
-      expect(validate.isEmpty("foo")).toBe(false);
-    });
+    it('considers whitespace only strings empty', function () {
+      expect(validate.isEmpty('')).toBe(true)
+      expect(validate.isEmpty(' ')).toBe(true)
+      expect(validate.isEmpty('         ')).toBe(true)
+      expect(validate.isEmpty('foo')).toBe(false)
+    })
 
-    it("considers empty arrays empty", function() {
-      expect(validate.isEmpty([])).toBe(true);
-      expect(validate.isEmpty([1])).toBe(false);
-    });
+    it('considers empty arrays empty', function () {
+      expect(validate.isEmpty([])).toBe(true)
+      expect(validate.isEmpty([1])).toBe(false)
+    })
 
-    it("considers empty objects empty", function() {
-      expect(validate.isEmpty({})).toBe(true);
-      expect(validate.isEmpty({foo: "bar"})).toBe(false);
-    });
+    it('considers empty objects empty', function () {
+      expect(validate.isEmpty({})).toBe(true)
+      expect(validate.isEmpty({ foo: 'bar' })).toBe(false)
+    })
 
-    it("considers false and 0 non empty", function() {
-      expect(validate.isEmpty(false)).toBe(false);
-      expect(validate.isEmpty(0)).toBe(false);
-    });
+    it('considers false and 0 non empty', function () {
+      expect(validate.isEmpty(false)).toBe(false)
+      expect(validate.isEmpty(0)).toBe(false)
+    })
 
-    it("considers date non empty", function() {
-      spyOn(validate, "isDate").and.callThrough();
-      expect(validate.isEmpty(new Date())).toBe(false);
-      expect(validate.isDate).toHaveBeenCalled();
-    });
-  });
+    it('considers date non empty', function () {
+      spyOn(validate, 'isDate').and.callThrough()
+      expect(validate.isEmpty(new Date())).toBe(false)
+      expect(validate.isDate).toHaveBeenCalled()
+    })
+  })
 
-  describe("collectFormValues", function() {
-    it("handles empty input", function() {
-      expect(validate.collectFormValues()).toEqual({});
-    });
+  describe('collectFormValues', function () {
+    it('handles empty input', function () {
+      expect(validate.collectFormValues()).toEqual({})
+    })
 
-    it("handles simple forms", function() {
-      var form = document.createElement("form");
+    it('handles simple forms', function () {
+      const form = document.createElement('form')
       form.innerHTML = '' +
         '<input type="text" name="text" value="example text">' +
         '<input type="text" name="empty-text">' +
@@ -927,110 +927,110 @@ describe("validate", function() {
         '  <option value="option1">' +
         '  <option value="option2">' +
         '</select>' +
-        '<textarea name="textarea-ignored" data-ignored>the textarea</textarea>'+
-        '<textarea name="textarea">the textarea</textarea>';
+        '<textarea name="textarea-ignored" data-ignored>the textarea</textarea>' +
+        '<textarea name="textarea">the textarea</textarea>'
 
       expect(validate.collectFormValues(form)).toEqual({
-        text: "example text",
-        "empty-text": null,
-        email: "example@email.com",
-        password: "password!",
-        "selected-checkbox": "checkbox",
-        "deselected-checkbox": null,
-        date: "2015-03-08",
-        hidden: "hidden",
+        text: 'example text',
+        'empty-text': null,
+        email: 'example@email.com',
+        password: 'password!',
+        'selected-checkbox': 'checkbox',
+        'deselected-checkbox': null,
+        date: '2015-03-08',
+        hidden: 'hidden',
         number: 4711,
-        url: "http://validatejs.org",
-        "single-checked-radio": "radio",
-        "single-unchecked-radio": null,
-        "checked-radio": "radio2",
-        "unchecked-radio": null,
-        "selected-dropdown": "option2",
-        "unselected-dropdown": null,
-        "textarea": "the textarea"
-        });
-    });
+        url: 'http://validatejs.org',
+        'single-checked-radio': 'radio',
+        'single-unchecked-radio': null,
+        'checked-radio': 'radio2',
+        'unchecked-radio': null,
+        'selected-dropdown': 'option2',
+        'unselected-dropdown': null,
+        textarea: 'the textarea'
+      })
+    })
 
-    it("has an option to nullify empty and trim strings", function() {
-      var form = document.createElement("form");
+    it('has an option to nullify empty and trim strings', function () {
+      const form = document.createElement('form')
       form.innerHTML = '' +
         '<input type="text" name="normal" value="normal">' +
         '<input type="text" name="empty">' +
         '<input type="text" name="whitespace" value=" ">' +
-        '<input type="text" name="trimmed" value=" foo ">';
+        '<input type="text" name="trimmed" value=" foo ">'
 
-      var options = {nullify: false};
+      let options = { nullify: false }
       expect(validate.collectFormValues(form, options)).toEqual({
-        normal: "normal",
-        empty: "",
-        whitespace: " ",
-        trimmed: " foo "
-      });
+        normal: 'normal',
+        empty: '',
+        whitespace: ' ',
+        trimmed: ' foo '
+      })
 
-      options = {nullify: true};
+      options = { nullify: true }
       expect(validate.collectFormValues(form, options)).toEqual({
-        normal: "normal",
+        normal: 'normal',
         empty: null,
-        whitespace: " ",
-        trimmed: " foo "
-      });
+        whitespace: ' ',
+        trimmed: ' foo '
+      })
 
-      options = {trim: true};
+      options = { trim: true }
       expect(validate.collectFormValues(form, options)).toEqual({
-        normal: "normal",
+        normal: 'normal',
         empty: null,
         whitespace: null,
-        trimmed: "foo"
-      });
-    });
+        trimmed: 'foo'
+      })
+    })
 
-    it("has a way to ignore elements", function() {
-      var form = document.createElement("form");
+    it('has a way to ignore elements', function () {
+      const form = document.createElement('form')
       form.innerHTML = '' +
         '<input type="text" name="ignored" value="ignored" data-ignored>' +
         '<select name="ignored-select" data-ignored>' +
         '  <option value="select" selected>Select</option>' +
-        '</select>';
-      expect(validate.collectFormValues(form)).toEqual({});
-    });
+        '</select>'
+      expect(validate.collectFormValues(form)).toEqual({})
+    })
 
-    it("uses true/false for checkboxes without a value", function() {
-      var form = document.createElement("form");
+    it('uses true/false for checkboxes without a value', function () {
+      const form = document.createElement('form')
       form.innerHTML = '' +
         '<input type="checkbox" name="checked" checked>' +
-        '<input type="checkbox" name="unchecked">';
+        '<input type="checkbox" name="unchecked">'
 
       expect(validate.collectFormValues(form)).toEqual({
         checked: true,
         unchecked: false
-      });
-    });
+      })
+    })
 
-    it("accepts jquery elements", function() {
-      var $form = $('<form><input value="foobar" name="input" /></form>');
+    it('accepts jquery elements', function () {
+      const $form = $('<form><input value="foobar" name="input" /></form>')
       expect(validate.collectFormValues($form)).toEqual({
-        input: "foobar"
-      });
-    });
+        input: 'foobar'
+      })
+    })
 
-    it("empty jquery collections return empty objects", function() {
-      expect(validate.collectFormValues($())).toEqual({});
-    });
+    it('empty jquery collections return empty objects', function () {
+      expect(validate.collectFormValues($())).toEqual({})
+    })
 
-    it("handles empty and invalid numeric inputs", function() {
-      var form = document.createElement("form");
+    it('handles empty and invalid numeric inputs', function () {
+      const form = document.createElement('form')
       form.innerHTML = '' +
         '<input type="number" name="emptyNumber">' +
-        '<input type="number" name="invalidNumber" value="abc">';
+        '<input type="number" name="invalidNumber" value="abc">'
 
       expect(validate.collectFormValues(form)).toEqual({
         emptyNumber: null,
         invalidNumber: null
-      });
-    });
+      })
+    })
 
-    it("handles select tags with 'multiple'", function() {
-      var form = document.createElement("form");
+    it("handles select tags with 'multiple'", function () {
+      const form = document.createElement('form')
       form.innerHTML = '' +
         '<select name="selected-dropdown" multiple>' +
         '  <option>' +
@@ -1048,114 +1048,114 @@ describe("validate", function() {
         '</select>' +
         '<select name="empty-value" multiple>' +
         '  <option selected>' +
-        '</select>';
+        '</select>'
 
       expect(validate.collectFormValues(form)).toEqual({
-        "selected-dropdown": ["option2", "option4"],
-        "unselected-dropdown": [],
-        "empty-value": [null]
-      });
-    });
+        'selected-dropdown': ['option2', 'option4'],
+        'unselected-dropdown': [],
+        'empty-value': [null]
+      })
+    })
 
-    it("escapes periods", function() {
-      var form = document.createElement("form");
-      form.innerHTML = '<input type="text" name="foo.bar.baz" value="quux" />';
+    it('escapes periods', function () {
+      const form = document.createElement('form')
+      form.innerHTML = '<input type="text" name="foo.bar.baz" value="quux" />'
 
       expect(validate.collectFormValues(form)).toEqual({
-        "foo\\\\.bar\\\\.baz": "quux"
-      });
-    });
-  });
+        'foo\\\\.bar\\\\.baz': 'quux'
+      })
+    })
+  })
 
-  describe("isDomElement", function() {
-    it("returns true of DOM elements", function() {
-      var form = document.createElement("form")
-        , div = document.createElement("div")
-        , a = document.createElement("a");
+  describe('isDomElement', function () {
+    it('returns true of DOM elements', function () {
+      const form = document.createElement('form')
+      const div = document.createElement('div')
+      const a = document.createElement('a')
 
-      expect(validate.isDomElement(form)).toBe(true);
-      expect(validate.isDomElement(div)).toBe(true);
-      expect(validate.isDomElement(a)).toBe(true);
-      expect(validate.isDomElement(document)).toBe(true);
-    });
+      expect(validate.isDomElement(form)).toBe(true)
+      expect(validate.isDomElement(div)).toBe(true)
+      expect(validate.isDomElement(a)).toBe(true)
+      expect(validate.isDomElement(document)).toBe(true)
+    })
 
-    it("returns false for other objects", function() {
-      expect(validate.isDomElement({})).toBe(false);
-      expect(validate.isDomElement(0)).toBe(false);
-      expect(validate.isDomElement(true)).toBe(false);
-      expect(validate.isDomElement("foo")).toBe(false);
-      expect(validate.isDomElement("")).toBe(false);
-      expect(validate.isDomElement([])).toBe(false);
-    });
-  });
+    it('returns false for other objects', function () {
+      expect(validate.isDomElement({})).toBe(false)
+      expect(validate.isDomElement(0)).toBe(false)
+      expect(validate.isDomElement(true)).toBe(false)
+      expect(validate.isDomElement('foo')).toBe(false)
+      expect(validate.isDomElement('')).toBe(false)
+      expect(validate.isDomElement([])).toBe(false)
+    })
+  })
 
-  describe("cleanAttributes", function() {
-    it("handles null for both inputs", function() {
-      expect(validate.cleanAttributes(null, {})).toEqual({});
-      expect(validate.cleanAttributes({}, null)).toEqual({});
-      expect(validate.cleanAttributes(null, null)).toEqual({});
-    });
+  describe('cleanAttributes', function () {
+    it('handles null for both inputs', function () {
+      expect(validate.cleanAttributes(null, {})).toEqual({})
+      expect(validate.cleanAttributes({}, null)).toEqual({})
+      expect(validate.cleanAttributes(null, null)).toEqual({})
+    })
 
-    it("always returns a copy", function() {
-      var obj = {};
-      expect(validate.cleanAttributes(obj, {})).not.toBe(obj);
-    });
+    it('always returns a copy', function () {
+      const obj = {}
+      expect(validate.cleanAttributes(obj, {})).not.toBe(obj)
+    })
 
-    it("returns a copy of the attributes with only the whitelisted attributes", function() {
-      var input = {
-        foo: "foo",
-        bar: "bar",
-        baz: "baz"
-      };
+    it('returns a copy of the attributes with only the whitelisted attributes', function () {
+      const input = {
+        foo: 'foo',
+        bar: 'bar',
+        baz: 'baz'
+      }
 
-      expect(validate.cleanAttributes(input, {})).toEqual({});
-      expect(validate.cleanAttributes(input, {foo: true})).toEqual({
-        foo: "foo"
-      });
-      expect(validate.cleanAttributes(input, {foo: true, bar: true})).toEqual({
-        foo: "foo",
-        bar: "bar"
-      });
-      expect(validate.cleanAttributes(input, {foo: true, bar: true, baz: true})).toEqual({
-        foo: "foo",
-        bar: "bar",
-        baz: "baz"
-      });
-      expect(validate.cleanAttributes(input, {foo: false})).toEqual({});
-    });
+      expect(validate.cleanAttributes(input, {})).toEqual({})
+      expect(validate.cleanAttributes(input, { foo: true })).toEqual({
+        foo: 'foo'
+      })
+      expect(validate.cleanAttributes(input, { foo: true, bar: true })).toEqual({
+        foo: 'foo',
+        bar: 'bar'
+      })
+      expect(validate.cleanAttributes(input, { foo: true, bar: true, baz: true })).toEqual({
+        foo: 'foo',
+        bar: 'bar',
+        baz: 'baz'
+      })
+      expect(validate.cleanAttributes(input, { foo: false })).toEqual({})
+    })
 
-    it("handles nested objects", function() {
-      var attributes = {
-        "foo.bar.baz": "foobarbaz",
+    it('handles nested objects', function () {
+      const attributes = {
+        'foo.bar.baz': 'foobarbaz',
         foo: {
-          shouldBeRemoved: "yup",
+          shouldBeRemoved: 'yup',
           bar: {
-            shouldAlsoBeRemoved: "uhuh",
-            baz: "baz",
-            quux: "quux"
+            shouldAlsoBeRemoved: 'uhuh',
+            baz: 'baz',
+            quux: 'quux'
           }
         },
         one: {
           two: {
-            four: "shouldBeRemoved"
+            four: 'shouldBeRemoved'
           }
         },
         somethingThatIsNull: null
-      };
+      }
 
-      var whitelist = {
-        "foo\\.bar\\.baz": true,
-        "foo.bar.baz": true,
-        "foo.bar.quux": true,
-        "one.two.three": true,
-        "somethingThatIsNull.someSubThingie": true
-      };
+      const whitelist = {
+        'foo\\.bar\\.baz': true,
+        'foo.bar.baz': true,
+        'foo.bar.quux': true,
+        'one.two.three': true,
+        'somethingThatIsNull.someSubThingie': true
+      }
       expect(validate.cleanAttributes(attributes, whitelist)).toEqual({
-        "foo.bar.baz": "foobarbaz",
+        'foo.bar.baz': 'foobarbaz',
         foo: {
           bar: {
-            baz: "baz",
-            quux: "quux"
+            baz: 'baz',
+            quux: 'quux'
           }
         },
         one: {
@@ -1163,65 +1163,65 @@ describe("validate", function() {
           }
         },
         somethingThatIsNull: null
-      });
-    });
+      })
+    })
 
-    it("works with constraints", function() {
-      var attributes = {
-        name: "Test",
-        description: "Yaay",
+    it('works with constraints', function () {
+      const attributes = {
+        name: 'Test',
+        description: 'Yaay',
         createdAt: 'omgomg',
         address: {
-          street: "Some street",
-          postal: "47 111"
+          street: 'Some street',
+          postal: '47 111'
         }
-      };
+      }
 
-      var constraints = {
+      const constraints = {
         name: {
           presence: true
         },
         description: {},
-        "address.street": {},
-        "address.postal": {},
-        "address.country": {}
-      };
+        'address.street': {},
+        'address.postal': {},
+        'address.country': {}
+      }
 
-      expect(validate.cleanAttributes(attributes, constraints)).not.toBe(attributes);
+      expect(validate.cleanAttributes(attributes, constraints)).not.toBe(attributes)
       expect(validate.cleanAttributes(attributes, constraints)).toEqual({
-        name: "Test",
-        description: "Yaay",
+        name: 'Test',
+        description: 'Yaay',
         address: {
-          street: "Some street",
-          postal: "47 111"
+          street: 'Some street',
+          postal: '47 111'
         }
-      });
-    });
-  });
+      })
+    })
+  })
 
-  describe("unique", function() {
-    it("handles empty and single value arrays", function() {
-      expect(validate.unique(null)).toEqual(null);
-      expect(validate.unique([])).toEqual([]);
-      expect(validate.unique([1])).toEqual([1]);
-      expect(validate.unique(["foo"])).toEqual(["foo"]);
-      expect(validate.unique("foo")).toEqual("foo");
-    });
+  describe('unique', function () {
+    it('handles empty and single value arrays', function () {
+      expect(validate.unique(null)).toEqual(null)
+      expect(validate.unique([])).toEqual([])
+      expect(validate.unique([1])).toEqual([1])
+      expect(validate.unique(['foo'])).toEqual(['foo'])
+      expect(validate.unique('foo')).toEqual('foo')
+    })
 
-    it("filters non unique values", function() {
-      expect(validate.unique(["foo", "bar", "bar", "foo", "baz"]))
-        .toEqual(["foo", "bar", "baz"]);
+    it('filters non unique values', function () {
+      expect(validate.unique(['foo', 'bar', 'bar', 'foo', 'baz']))
+        .toEqual(['foo', 'bar', 'baz'])
 
-      expect(validate.unique(["foo", "foo", "foo"]))
-        .toEqual(["foo"]);
+      expect(validate.unique(['foo', 'foo', 'foo']))
+        .toEqual(['foo'])
 
       expect(validate.unique([1, 2, 3, 3, 2, 1]))
-        .toEqual([1, 2, 3]);
-    });
+        .toEqual([1, 2, 3])
+    })
 
-    it("returns a copy", function() {
-      var a = ["foo"];
-      expect(validate.unique(a)).not.toBe(a);
-    });
-  });
-});
+    it('returns a copy', function () {
+      const a = ['foo']
+      expect(validate.unique(a)).not.toBe(a)
+    })
+  })
+})

@@ -47,7 +47,7 @@
   "prettier": "prettier-config-standard",
   "license": "MIT",
   "lint-staged": {
-    "*": "prettier --write",
+    "*": "prettier --ignore-unknown --write",
     "*.js": "eslint --fix"
   }
 }

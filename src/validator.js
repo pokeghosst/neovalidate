@@ -21,6 +21,7 @@ export default class Validator {
       format: 'grouped',
       fullMessages: true,
       cleanAttributes: true,
+      nullify: true,
       ...options
     }
   }
@@ -37,19 +38,31 @@ export default class Validator {
 
   async validateAsync(attributes, constraints, options = {}) {
     const opts = { ...this.#options, ...options }
-    const WrapErrors = opts.wrapErrors || ((errors) => errors)
+
+    // Check if Promise is available
+    if (!Validator.Promise) {
+      throw new Error('Promise support is required for async validation')
+    }
 
     if (opts.cleanAttributes) {
-      attributes = Validator.#cleanAttributes(attributes, constraints)
+      attributes = Validator.cleanAttributes(attributes, constraints)
     }
 
     const results = Validator.#runValidations(attributes, constraints, opts)
 
-    await Validator.#waitForResults(results)
+    const hasPromises = results.some((r) => Validator.isPromise(r.error))
+    if (hasPromises) {
+      await Validator.#waitForResults(results)
+    }
+
     const errors = Validator.#processValidationResults(results, opts)
 
     if (errors) {
-      throw new WrapErrors(errors, opts, attributes, constraints)
+      if (opts.wrapErrors) {
+        throw new opts.wrapErrors(errors, opts, attributes, constraints)
+      } else {
+        throw errors
+      }
     }
 
     return attributes
@@ -157,10 +170,10 @@ export default class Validator {
           result.error = error || null
         })
       )
-    }, new Validator.Promise((r) => r()))
+    }, Validator.Promise.resolve())
   }
 
-  static #cleanAttributes(attributes, whitelist) {
+  static cleanAttributes(attributes, whitelist) {
     const whitelistCreator = (obj, key, last) => {
       if (Validator.isObject(obj[key])) return obj[key]
       return (obj[key] = last ? true : {})
@@ -291,7 +304,7 @@ export default class Validator {
       )
     },
     {
-      FORMAT_REGEXP: /(%?)%\{([^\}]+)\}/g
+      FORMAT_REGEXP: /(%?)%\{([^}]+)\}/g
     }
   )
 
@@ -822,7 +835,7 @@ export default class Validator {
       },
       {
         PATTERN:
-          /^(?!\.)(?!.*\.\.)([A-Z0-9_+-\.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/i
+          /^(?!\.)(?!.*\.\.)([A-Z0-9_+-.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9-]*\.)+[A-Z]{2,}$/i
       }
     ),
 

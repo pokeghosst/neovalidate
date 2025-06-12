@@ -1,0 +1,39 @@
+---
+name: vitest-coverage
+
+on:
+  push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run Unit Tests
+        run: pnpm test:coverage
+      - name: Publish Results Badge
+        uses: wjervis7/vitest-badge-action@v1.0.0
+        if: success() || failure()
+        with:
+          result-type: statements
+          upload-badge: false          
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: './badge.svg'  

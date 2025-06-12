@@ -31,6 +31,7 @@ jobs:
         with:
           vitest-config-path: 'vitest.config.js'
           result-type: lines
+          badge-text: Coverage (lines)
           gist-token: ${{ secrets.GIST_TOKEN }}
           gist-url: https://gist.github.com/pokeghosst/6ef472f65d6941898f6925797f958bfa
           upload-badge: true

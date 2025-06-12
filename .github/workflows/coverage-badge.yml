@@ -28,10 +28,9 @@ jobs:
         run: pnpm test:coverage
       - name: Publish Results Badge
         uses: wjervis7/vitest-badge-action@v1.0.0
-        if: success() || failure()
         with:
           vitest-config-path: 'vitest.config.js'
           result-type: lines
           gist-token: ${{ secrets.GIST_TOKEN }}
           gist-url: https://gist.github.com/pokeghosst/6ef472f65d6941898f6925797f958bfa
-          upload-badge: ${{ github.base_ref == 'refs/heads/main' }}
+          upload-badge: true

@@ -11,7 +11,9 @@ Modernized fork of Validate.js, a declarative validation library.
 <a href="https://npmjs.org/package/neovalidate">
   <img src="https://badgen.now.sh/npm/dm/neovalidate" alt="downloads" />
 </a>
-<img src="https://gist.githubusercontent.com/pokeghosst/6ef472f65d6941898f6925797f958bfa/raw/e9a871d9384c372b4b1c420039f2c69b46665396/badge.svg" alt="coverage" />
+<a href="https://github.com/pokeghosst/neovalidate/actions/workflows/coverage-badge.yml">
+  <img src="https://gist.githubusercontent.com/pokeghosst/6ef472f65d6941898f6925797f958bfa/raw/badge.svg" alt="coverage" />
+</a>
 
 ## Installing
 

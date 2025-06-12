@@ -6,7 +6,8 @@
     "Nicklas Ansman <nicklas@ansman.se> (original validate.js author)"
   ],
   "description": "Modernized fork of Validate.js, a declarative validation library ",
-  "main": "src/index.js",
+  "main": "src/validator.js",
+  "typings": "src/validate.d.ts",
   "type": "module",
   "homepage": "https://github.com/pokeghosst/neovalidate",
   "repository": {

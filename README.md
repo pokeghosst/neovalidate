@@ -26,7 +26,7 @@ npm install neovalidate
 Toy example:
 
 ```js
-import Validator from './src/validator'
+import Validator from 'neovalidate'
 
 const validator = new Validator()
 

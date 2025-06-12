@@ -31,11 +31,6 @@ jobs:
         uses: wjervis7/vitest-badge-action@v1.0.0
         if: success() || failure()
         with:
-          result-type: statements
-          upload-badge: false          
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
           vitest-config-path: './vitest.config.js'
           result-type: lines
           gist-token: ${{ secrets.GIST_TOKEN }}

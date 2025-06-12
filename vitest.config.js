@@ -5,7 +5,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     coverage: {
-      reporter: ['json']
+      reporter: ['json-summary']
     }
   }
 })

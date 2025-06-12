@@ -36,4 +36,8 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: './badge.svg'  
+          vitest-config-path: './vitest.config.js'
+          result-type: lines
+          gist-token: ${{ secrets.GIST_TOKEN }}
+          gist-url: https://gist.github.com/pokeghosst/6ef472f65d6941898f6925797f958bfa
+          upload-badge: ${{ github.base_ref == 'refs/heads/main' }}
